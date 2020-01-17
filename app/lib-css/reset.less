@@ -76,10 +76,6 @@ video {
   background: transparent;
 }
 
-body {
-  line-height: 1;
-}
-
 :focus {
   outline: 1;
 }
@@ -147,7 +143,17 @@ button {
   outline: none;
 }
 
-#app {
-  font-size: 16px;
-  overflow: hidden;
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  line-height: 1;
+
+  #app {
+    font-size: 16px;
+    overflow: hidden;
+  }
 }

@@ -6,12 +6,12 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/normal',
-    component: () => import('./pages/normal/normal.vue'),
-  },
-  {
     path: '/login',
     component: () => import('./pages/login/login.vue'),
+  },
+  {
+    path: '/normal',
+    component: () => import('./pages/normal/normal.vue'),
   },
   {
     path: '*',

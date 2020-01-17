@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const sassData = require('./app/config/pack/sass-data');
+
 const webpackConfig = () => {
   const config = {
     entry: './app/index.js',
@@ -31,6 +33,20 @@ const webpackConfig = () => {
         {
           test: /\.(less|css)$/,
           use: ['vue-style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
+        },
+        {
+          test: /\.scss$/,
+          use: [
+            'vue-style-loader',
+            'css-loader',
+            'postcss-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                prependData: sassData,
+              },
+            },
+          ],
         },
         {
           test: /\.js$/,

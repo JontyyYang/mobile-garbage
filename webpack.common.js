@@ -3,11 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-const sassData = require('./app/config/pack/sass-data');
+// 这里调用全局通用的样式，在sass-loader中配置
+const sassData = require('./client/config/pack/sass-data');
 
 const webpackConfig = () => {
   const config = {
-    entry: './app/index.js',
+    entry: './client/index.js',
 
     output: {
       path: path.resolve(__dirname, './dist'),
@@ -16,7 +17,7 @@ const webpackConfig = () => {
 
     plugins: [
       new HtmlWebpackPlugin({
-        template: './app/index.html',
+        template: './client/index.html',
       }),
 
       new CleanWebpackPlugin(),
@@ -66,11 +67,11 @@ const webpackConfig = () => {
 
     resolve: {
       alias: {
-        libjs: path.resolve('app/lib-js'),
-        libcss: path.resolve('app/lib-css'),
-        libimg: path.resolve('app/lib-img'),
-        pages: path.resolve('app/pages'),
-        '@cmp': path.resolve('app/commponents'),
+        libjs: path.resolve('client/lib-js'),
+        libcss: path.resolve('client/lib-css'),
+        libimg: path.resolve('client/lib-img'),
+        pages: path.resolve('client/pages'),
+        '@cmp': path.resolve('client/commponents'),
       },
     },
   };

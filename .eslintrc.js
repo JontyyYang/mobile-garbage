@@ -25,11 +25,11 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [
-          ['libjs', path.resolve('app/lib-js')],
-          ['libcss', path.resolve('app/lib-css')],
-          ['libimg', path.resolve('app/lib-img')],
-          ['pages', path.resolve('app/pages')],
-          ['@cmp', path.resolve('app/commponents')],
+          ['libjs', path.resolve('client/lib-js')],
+          ['libcss', path.resolve('client/lib-css')],
+          ['libimg', path.resolve('client/lib-img')],
+          ['pages', path.resolve('client/pages')],
+          ['@cmp', path.resolve('client/commponents')],
         ],
       },
     },

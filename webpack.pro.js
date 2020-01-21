@@ -1,3 +1,9 @@
+/*
+ * @Author: jontyy
+ * @Date: 2019-12-07 16:43:50
+ * @Description:生产环境的一些配置
+ */
+
 const merge = require('webpack-merge');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const common = require('./webpack.common.js');

@@ -7,25 +7,25 @@
   </div>
 </template>
 <script>
-export default {
-  name: 'Login',
-  data() {
-    return {};
-  },
-};
+  export default {
+    name: 'Login',
+    data() {
+      return {};
+    },
+  };
 </script>
 <style lang="less" scoped>
-.title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+  .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-.no-style {
-  display: flex;
-  text-decoration: none;
-  color: blueviolet;
-  margin: 20px auto;
-}
+  .no-style {
+    display: flex;
+    text-decoration: none;
+    color: blueviolet;
+    margin: 20px auto;
+  }
 </style>

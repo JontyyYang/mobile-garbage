@@ -19,31 +19,31 @@
   </div>
 </template>
 <script>
-import { Button } from 'vant';
-import avator from 'libimg/avator.jpg';
+  import { Button } from 'vant';
+  import avator from 'libimg/avator.jpg';
 
-export default {
-  name: 'Test',
-  created() {},
+  export default {
+    name: 'Test',
+    created() {},
 
-  components: {
-    [Button.name]: Button,
-  },
-  data() {
-    return {
-      avator,
-    };
-  },
-};
+    components: {
+      [Button.name]: Button,
+    },
+    data() {
+      return {
+        avator,
+      };
+    },
+  };
 </script>
 <style lang="less" scoped>
-.test {
-  color: green;
+  .test {
+    color: green;
 
-  img {
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
+    img {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+    }
   }
-}
 </style>

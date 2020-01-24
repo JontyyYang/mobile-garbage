@@ -19,6 +19,41 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
+  // 这里是关闭了csrf校验，是不合理的，上到服务器必须弄成正确的
+  config.security = {
+    csrf: {
+      // headerName: 'x-csrf-token',
+      enable: false,
+    },
+    // eslint-disable-next-line
+    domainWhiteList: ['http://localhost:8080'],
+  };
+
+  config.cors = {
+    domainWhiteList: {
+      origin: 'http://localhost:8080',
+      credentials: true,
+      allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+    },
+  };
+
+  config.mysql = {
+    client: {
+      // host
+      host: '127.0.0.1',
+      // 端口号
+      port: '3306',
+      // 用户名
+      user: 'root',
+      // 密码
+      password: '199798',
+      // 数据库名
+      database: 'garbage',
+    },
+    app: true,
+    agent: false,
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

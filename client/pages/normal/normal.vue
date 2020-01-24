@@ -5,26 +5,26 @@
   </div>
 </template>
 <script>
-import test from 'pages/test/test.vue';
+  import test from 'pages/test/test.vue';
 
-export default {
-  name: 'Test',
-  components: {
-    test,
-  },
-  data() {
-    return {};
-  },
-};
+  export default {
+    name: 'Test',
+    components: {
+      test,
+    },
+    data() {
+      return {};
+    },
+  };
 </script>
 <style lang="less" scoped>
-.test {
-  color: green;
+  .test {
+    color: green;
 
-  img {
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
+    img {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+    }
   }
-}
 </style>

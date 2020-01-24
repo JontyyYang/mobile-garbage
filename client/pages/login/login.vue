@@ -22,7 +22,9 @@
           />
         </van-cell-group>
       </form>
-      <van-button round type="info" class="login-button" block>点我登录</van-button>
+      <van-button round type="info" class="login-button" block @click="loginAction"
+        >点我登录</van-button
+      >
     </div>
     <div class="toRegister" @click="jumpToRegister">没有账号？点我注册</div>
   </div>
@@ -42,125 +44,193 @@
           />
         </van-cell-group>
       </form>
-      <van-button round type="info" class="register-button" block>点我注册</van-button>
+      <van-button round type="info" class="register-button" block @click="registerAction"
+        >点我注册</van-button
+      >
     </div>
     <div class="toLogin" @click="jumpToLogin">返回登录页面</div>
   </div>
 </template>
 
 <script>
-import { Field, CellGroup, Button } from 'vant';
-import { UserInfo, RegisterInfo } from './userStateInfo';
+  import { Field, CellGroup, Button, Notify } from 'vant';
+  import api from 'libjs/api';
+  import { validatorLength, validatorTel } from 'libjs/util';
 
-const status = {
-  Login: 'login',
-  Register: 'register',
-};
+  import { UserInfo, RegisterInfo } from './userStateInfo';
 
-export default {
-  name: 'Login',
-  components: {
-    [Field.name]: Field,
-    [CellGroup.name]: CellGroup,
-    [Button.name]: Button,
-  },
-  data() {
-    return {
-      // 用户信息
-      userInfo: {
-        userPhone: '',
-        userPassword: '',
+  const status = {
+    Login: 'login',
+    Register: 'register',
+  };
+
+  export default {
+    name: 'Login',
+    components: {
+      [Field.name]: Field,
+      [CellGroup.name]: CellGroup,
+      [Button.name]: Button,
+      [Notify.name]: Notify,
+    },
+    data() {
+      return {
+        // 用户信息
+        userInfo: {
+          userPhone: '',
+          userPassword: '',
+        },
+
+        // 注册信息
+        registerInfo: {
+          userName: '',
+          userNickname: '',
+          userPhone: '',
+          userPassword: '',
+          userCurrentPassword: '',
+        },
+
+        // 注册所需要的信息
+        RegisterInfo,
+        // 登录需要的用户信息
+        UserInfo,
+
+        // 登录还是注册
+        status,
+        // todo
+        currentStatus: status.Register,
+      };
+    },
+    created() {
+      // api.get('/user/user').then(res => {
+      //   console.log(res);
+      // });
+    },
+    methods: {
+      clear(e, type) {
+        switch (type) {
+          case status.Login:
+            this.userInfo[e] = '';
+
+            break;
+          case status.Register:
+            this.registerInfo[e] = '';
+
+            break;
+          default:
+            break;
+        }
       },
 
-      // 注册信息
-      registerInfo: {
-        userName: '',
-        userPhone: '',
-        userPassword: '',
-        userCurrentPassword: '',
-        userAge: '',
-        userNickname: '',
-        userSex: '',
+      jumpToRegister() {
+        this.currentStatus = this.status.Register;
       },
 
-      // 注册所需要的信息
-      RegisterInfo,
-      // 登录需要的用户信息
-      UserInfo,
+      jumpToLogin() {
+        this.currentStatus = this.status.Login;
+      },
 
-      // 登录还是注册
-      status,
-      currentStatus: status.Login,
-    };
-  },
-  methods: {
-    clear(e, type) {
-      switch (type) {
-        case status.Login:
-          this.userInfo[e] = '';
-
-          break;
-        case status.Register:
-          this.registerInfo[e] = '';
-
-          break;
-        default:
-          break;
-      }
+      loginAction() {
+        // const { userInfo } = this;
+        // console.log(validatorTel(userInfo.userPhone), validatorLength(userInfo.userPassword, 8));
+        // if (validatorTel(userInfo.userPhone) && validatorLength(userInfo.userPassword, 8)) {
+        //   console.log(1);
+        // } else {
+        //   console.log(2);
+        // }
+      },
+      registerAction() {
+        const {
+          registerInfo: { userName, userNickname, userPhone, userPassword, userCurrentPassword },
+        } = this;
+        // 想了想，前端这里还是要处理的， 不想什么都丢给后端，前端这里要判定是否为空， 密码是否相等
+        const tempArr = [
+          {
+            value: userName,
+            name: '请输入用户名哦(*╹▽╹*)',
+          },
+          {
+            value: userNickname,
+            name: '请输入昵称哦(*╹▽╹*)',
+          },
+          {
+            value: userPhone,
+            name: '请输入电话号码哦(*╹▽╹*)',
+          },
+          {
+            value: userPassword,
+            name: '请输入密码哦(*╹▽╹*)',
+          },
+          {
+            value: userCurrentPassword,
+            name: '请确认密码哦(*╹▽╹*)',
+          },
+        ];
+        for (let i = 0, j = tempArr.length; i !== j; i++) {
+          if (!tempArr[i].value) {
+            Notify(tempArr[i].name);
+            return;
+          }
+        }
+        if (userPassword !== userCurrentPassword) {
+          Notify('两次密码必须要一致哦');
+          return;
+        }
+        api
+          .post('/user/register', {
+            userName,
+            userNickname,
+            userPhone,
+            userPassword,
+          })
+          .then(res => {
+            console.log(res);
+          });
+      },
     },
-
-    jumpToRegister() {
-      this.currentStatus = this.status.Register;
-    },
-
-    jumpToLogin() {
-      this.currentStatus = this.status.Login;
-    },
-  },
-};
+  };
 </script>
 
 <style lang="scss" scoped>
-$highlight-color: #f90;
-$base-url: '../../lib-img/';
+  $highlight-color: #f90;
+  $base-url: '../../lib-img/';
 
-.login-container {
-  background: url($base-url+'bg.jpg') no-repeat 100% 100%;
-}
-
-.register-container {
-  background: url($base-url+'register.jpg') no-repeat 100% 100%;
-}
-
-.login-container,
-.register-container {
-  height: 100%;
-  width: 100%;
-  background-size: 100% 100%;
-}
-
-.login,
-.register {
-  @include pos-to-center;
-
-  width: 4rem /* 300/75 */;
-
-  &-button {
-    margin: 0.2rem /* 15/75 */ auto 0;
-    width: 2.666667rem; /* 200/75 */
+  .login-container {
+    background: url($base-url+'bg.jpg') no-repeat 100% 100%;
   }
-}
 
-.toRegister,
-.toLogin {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #323232;
-}
+  .register-container {
+    background: url($base-url+'register.jpg') no-repeat 100% 100%;
+  }
 
-.toLogin {
-  color: #fff;
-}
+  .login-container,
+  .register-container {
+    height: 100%;
+    width: 100%;
+    background-size: 100% 100%;
+  }
+
+  .login,
+  .register {
+    @include pos-to-center;
+
+    width: 4rem /* 300/75 */;
+
+    &-button {
+      margin: 0.2rem /* 15/75 */ auto 0;
+      width: 2.666667rem; /* 200/75 */
+    }
+  }
+
+  .toRegister,
+  .toLogin {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #323232;
+  }
+
+  .toLogin {
+    color: #fff;
+  }
 </style>

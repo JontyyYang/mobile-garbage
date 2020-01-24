@@ -52,7 +52,10 @@
 
 1. 建议按照 vscod.md 的配置设置一下自己 vscode 的配置， 否则部分属性，比如 eslint 不会生效。
 2. npm 版本 12.14.1
-3. **treer -i "/node_modules|.git|.vscode|yarn-error.log/" -e ./docs/TREE.md** 可以生成项目结构到指定目录下，需要全局安装 treer
+3. 开发的时候建议下载谷歌插件，cors 相关的， 因为客户端打包的端口在 8080，服务器在 7001，会跨域（实际是开发代码写的就有问题，被无情吐槽了）
+4.
+
+4) **treer -i "/node_modules|.git|.vscode|yarn-error.log/" -e ./docs/TREE.md** 可以生成项目结构到指定目录下，需要全局安装 treer
 
 # rem 相关
 
@@ -121,3 +124,7 @@ mobile-garbage
 8. qs 使用文档 https://www.npmjs.com/package/qs
 9. lodash 使用文档 https://www.lodashjs.com/docs/latest
 10. axios 文档 https://github.com/axios/axios
+
+## todo
+
+1. config.default 中关闭的 csrf 校验，上到服务器应该恢复 https://blog.csdn.net/weixin_43704471/article/details/90763103

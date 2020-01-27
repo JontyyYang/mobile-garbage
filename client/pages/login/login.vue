@@ -54,6 +54,7 @@
 
 <script>
   import { Field, CellGroup, Button, Notify } from 'vant';
+
   import api from 'libjs/api';
   import { validatorLength, validatorTel } from 'libjs/util';
 
@@ -66,12 +67,14 @@
 
   export default {
     name: 'Login',
+
     components: {
       [Field.name]: Field,
       [CellGroup.name]: CellGroup,
       [Button.name]: Button,
       [Notify.name]: Notify,
     },
+
     data() {
       return {
         // 用户信息
@@ -97,15 +100,12 @@
         // 登录还是注册
         status,
         // todo
-        currentStatus: status.Register,
+        currentStatus: status.Login,
       };
     },
-    created() {
-      // api.get('/user/user').then(res => {
-      //   console.log(res);
-      // });
-    },
+
     methods: {
+      // 清空当前输入框
       clear(e, type) {
         switch (type) {
           case status.Login:
@@ -121,23 +121,46 @@
         }
       },
 
+      // 跳转至注册页
       jumpToRegister() {
         this.currentStatus = this.status.Register;
       },
 
+      // 跳转至登录页
       jumpToLogin() {
         this.currentStatus = this.status.Login;
       },
 
+      // 登录操作
       loginAction() {
-        // const { userInfo } = this;
-        // console.log(validatorTel(userInfo.userPhone), validatorLength(userInfo.userPassword, 8));
-        // if (validatorTel(userInfo.userPhone) && validatorLength(userInfo.userPassword, 8)) {
-        //   console.log(1);
-        // } else {
-        //   console.log(2);
-        // }
+        const {
+          userInfo,
+          userInfo: { userPhone, userPassword },
+        } = this;
+        if (!validatorTel(userPhone)) {
+          Notify('手机号不符合规范');
+          return;
+        }
+        if (!validatorLength(userPassword, 'range', 8, 16)) {
+          Notify('密码长度不正确');
+          return;
+        }
+        api
+          .get('/user/login', {
+            params: {
+              userPhone,
+              userPassword,
+            },
+          })
+          .then(res => {
+            if (res.data.code !== 0) {
+              Notify(res.data.message);
+              return;
+            }
+            this.$router.replace('/home');
+          });
       },
+
       registerAction() {
         const {
           registerInfo: { userName, userNickname, userPhone, userPassword, userCurrentPassword },
@@ -183,7 +206,13 @@
             userPassword,
           })
           .then(res => {
-            console.log(res);
+            if (res.data.code !== 0) {
+              Notify(res.data.message);
+            }
+            Notify('注册成功，3s后回到注册页面');
+            setTimeout(() => {
+              this.currentStatus = status.Login;
+            }, 3000);
           });
       },
     },

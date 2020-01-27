@@ -1,31 +1,58 @@
 <template>
   <div>
     <div>
-      <div class="title">基于vue、vant的简单移动端小脚手架</div>
-      <router-link to="/login" class="no-style">跳转到登录页</router-link>
+      <van-nav-bar :title="NavBarData.title">
+        <van-icon name="replay" @click="onClickRight" slot="right" />
+      </van-nav-bar>
+      <!-- <router-link to="/login" class="no-style">跳转到登录页</router-link> -->
+      <router-view />
+      <van-tabbar route>
+        <van-tabbar-item replace to="/home" icon="wap-home-o">
+          首页
+        </van-tabbar-item>
+        <van-tabbar-item replace to="/home/shop" icon="shop-o">
+          商城
+        </van-tabbar-item>
+        <van-tabbar-item replace to="/home/user" icon="contact">
+          用户
+        </van-tabbar-item>
+      </van-tabbar>
     </div>
   </div>
 </template>
 <script>
+  import { NavBar, Toast, Tabbar, TabbarItem, Icon } from 'vant';
+  import { NavBarData } from './constant';
   export default {
-    name: 'Login',
+    name: 'Home',
+    components: {
+      [NavBar.name]: NavBar,
+      [Toast.name]: Toast,
+      [Icon.name]: Icon,
+      [Tabbar.name]: Tabbar,
+      [TabbarItem.name]: TabbarItem,
+    },
     data() {
-      return {};
+      return {
+        NavBarData,
+      };
+    },
+    methods: {
+      onClickLeft() {
+        Toast('返回');
+      },
+      onClickRight() {
+        Toast('刷新');
+        this.$router.go(0);
+      },
     },
   };
 </script>
 <style lang="less" scoped>
-  .title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .no-style {
-    display: flex;
-    text-decoration: none;
-    color: blueviolet;
-    margin: 20px auto;
-  }
+  // .no-style {
+  //   display: flex;
+  //   text-decoration: none;
+  //   color: blueviolet;
+  //   margin: 20px auto;
+  // }
 </style>

@@ -14,8 +14,26 @@ const routes = [
     component: () => import('./pages/normal/normal.vue'),
   },
   {
-    path: '*',
+    path: '/home',
     component: () => import('./pages/home/home.vue'),
+    children: [
+      {
+        path: 'shop',
+        component: () => import('./pages/shop/shop.vue'),
+      },
+      {
+        path: 'user',
+        component: () => import('./pages/user/user.vue'),
+      },
+      {
+        path: '/',
+        component: () => import('./pages/main/main.vue'),
+      },
+    ],
+  },
+  {
+    path: '*',
+    component: () => import('./pages/login/login.vue'),
   },
 ];
 const router = new VueRouter({ routes });

@@ -128,3 +128,5 @@ mobile-garbage
 ## todo
 
 1. config.default 中关闭的 csrf 校验，上到服务器应该恢复 https://blog.csdn.net/weixin_43704471/article/details/90763103
+2. 不同页面的 title 应该不同， 需要修改 webpack 中的 html 模板配置
+3. 登录注册需要经过加密才可以

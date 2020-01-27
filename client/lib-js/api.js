@@ -29,7 +29,6 @@ api.interceptors.request.use(config => {
 
   // 如果后台接收的contentType值为application/x-www-form-urlencoded 而不是上面默认的 application/json
   // 且为post的请求，要引入qs模块对参数的处理：
-  console.log(contentType, config);
 
   // 必须把config给返回出去，这是请求的一些参数，配置，必须的
   return config;

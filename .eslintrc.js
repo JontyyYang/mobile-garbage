@@ -20,6 +20,7 @@ module.exports = {
     'no-console': 1,
     'arrow-parens': 0,
     'import/no-extraneous-dependencies': 0,
+    'comma-dangle': 0,
   },
   settings: {
     'import/resolver': {

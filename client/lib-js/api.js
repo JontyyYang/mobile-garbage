@@ -17,6 +17,7 @@ const api = axios.create({
   baseURL: 'http://127.0.0.1:7001/',
   timeout: 1000,
   headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+  // withCredentials: true,
 
   // headers: {
   //   'x-csrf-token': getCookie('csrfToken'), // 前后端不分离的情况加每次打开客户端，egg会直接在客户端的 Cookie 中写入密钥 ，密钥的 Key 就是 'scrfToken' 这个字段，所以直接获取就好了

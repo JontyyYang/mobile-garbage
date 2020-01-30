@@ -30,6 +30,14 @@ class UserController extends Controller {
     } else {
       body = res;
     }
+    ctx.cookies.set('username', 'jontyy', {
+      maxAge: 24 * 3600 * 1000,
+      httpOnly: true,
+      signed: true,
+      encrypt: true,
+      domain: '127.0.0.1',
+    });
+    ctx.set('Access-Control-Allow-Credentials', true);
     ctx.body = { code, body, message };
   }
 

@@ -154,6 +154,8 @@
               userPhone,
               userPassword: password,
             },
+            // 需要把cookie待过去
+            withCredentials: true,
           })
           .then(res => {
             if (res.data.code !== 0) {

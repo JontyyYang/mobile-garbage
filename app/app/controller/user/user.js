@@ -51,9 +51,6 @@ class UserController extends Controller {
     } else if (userNickname.length < 2 || userNickname.length > 11) {
       code = -1;
       message = '用户昵称长度必须在2-11个字符之间';
-    } else if (userPassword.length < 8 || userPassword.length > 16) {
-      code = -1;
-      message = '用户密码长度必须在8-20之间';
     } else if (userPhone.length !== 11 || !/^1[3456789]\d{9}$/.test(userPhone)) {
       code = -1;
       message = '手机号不符合规范';

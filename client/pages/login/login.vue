@@ -55,6 +55,8 @@
 <script>
   import { Field, CellGroup, Button, Notify } from 'vant';
 
+  import md5 from 'js-md5';
+
   import api from 'libjs/api';
   import { validatorLength, validatorTel } from 'libjs/util';
 
@@ -137,6 +139,7 @@
           userInfo,
           userInfo: { userPhone, userPassword },
         } = this;
+        const password = md5(userPassword);
         if (!validatorTel(userPhone)) {
           Notify('手机号不符合规范');
           return;
@@ -149,7 +152,7 @@
           .get('/user/login', {
             params: {
               userPhone,
-              userPassword,
+              userPassword: password,
             },
           })
           .then(res => {
@@ -198,12 +201,17 @@
           Notify('两次密码必须要一致哦');
           return;
         }
+        if (!validatorLength(userPassword, 'range', 8, 16)) {
+          Notify('密码长度不正确');
+          return;
+        }
+        const password = md5(userPassword);
         api
           .post('/user/register', {
             userName,
             userNickname,
             userPhone,
-            userPassword,
+            userPassword: password,
           })
           .then(res => {
             if (res.data.code !== 0) {

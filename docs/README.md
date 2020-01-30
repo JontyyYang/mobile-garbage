@@ -46,14 +46,14 @@
 2. yarn || npm install 安装依赖包
 3. yarn dev 开发 || npm run dev 开发
 4. yarn build || npm run build 打包
-5.
+5. 在 app 目录下 yarn 安装服务器依赖，yarn dev 开发
+6. 数据库相关数据后续会想办法折腾出来
 
 # 相关问题
 
 1. 建议按照 vscod.md 的配置设置一下自己 vscode 的配置， 否则部分属性，比如 eslint 不会生效。
 2. npm 版本 12.14.1
-3. 开发的时候建议下载谷歌插件，cors 相关的， 因为客户端打包的端口在 8080，服务器在 7001，会跨域（实际是开发代码写的就有问题，被无情吐槽了）
-4.
+3. 重要数据走 md5 加密
 
 4) **treer -i "/node_modules|.git|.vscode|yarn-error.log/" -e ./docs/TREE.md** 可以生成项目结构到指定目录下，需要全局安装 treer
 
@@ -129,6 +129,5 @@ mobile-garbage
 
 1. config.default 中关闭的 csrf 校验，上到服务器应该恢复 https://blog.csdn.net/weixin_43704471/article/details/90763103
 2. 不同页面的 title 应该不同， 需要修改 webpack 中的 html 模板配置
-3. 登录注册需要经过加密才可以
-4. vuex 要存数据，要获取用户登录数据那些
-5. 不同页面，如果没有登录是不可以操作的
+3. vuex 要存数据，要获取用户登录数据那些
+4. 不同页面，如果没有登录是不可以操作的

@@ -13,7 +13,7 @@
         <van-tabbar-item replace to="/home/shop" icon="shop-o">
           商城
         </van-tabbar-item>
-        <van-tabbar-item replace to="/home/user" icon="contact">
+        <van-tabbar-item replace to="/home/user" icon="contact" info="9">
           用户
         </van-tabbar-item>
       </van-tabbar>

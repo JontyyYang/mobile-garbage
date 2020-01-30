@@ -4,3 +4,22 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+@mixin fullFill {
+  @include size(100%);
+}
+
+@mixin displayCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin round {
+  border-radius: 50%;
+}

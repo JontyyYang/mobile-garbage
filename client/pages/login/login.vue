@@ -155,7 +155,7 @@
               userPassword: password,
             },
             // 需要把cookie待过去
-            withCredentials: true,
+            // withCredentials: true,
           })
           .then(res => {
             if (res.data.code !== 0) {

@@ -17,7 +17,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1579574947481_5941';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ['login']; //eslint-disable-line
 
   // 这里是关闭了csrf校验，是不合理的，上到服务器必须弄成正确的
   config.security = {

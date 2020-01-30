@@ -31,13 +31,14 @@ class UserController extends Controller {
       body = res;
     }
     ctx.cookies.set('username', 'jontyy', {
-      maxAge: 24 * 3600 * 1000,
+      maxAge: 1 * 3600 * 1000,
       httpOnly: true,
       signed: true,
       encrypt: true,
       domain: '127.0.0.1',
     });
-    ctx.set('Access-Control-Allow-Credentials', true);
+    // 这样会导致其他页面传递不带cookie，在middleware中设置就可以避免没一个请求都加上这一句话了
+    // ctx.set('Access-Control-Allow-Credentials', true);
     ctx.body = { code, body, message };
   }
 

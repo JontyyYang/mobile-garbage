@@ -17,8 +17,7 @@ const api = axios.create({
   baseURL: 'http://127.0.0.1:7001/',
   timeout: 1000,
   headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-  // withCredentials: true,
-
+  withCredentials: true,
   // headers: {
   //   'x-csrf-token': getCookie('csrfToken'), // 前后端不分离的情况加每次打开客户端，egg会直接在客户端的 Cookie 中写入密钥 ，密钥的 Key 就是 'scrfToken' 这个字段，所以直接获取就好了
   // },
@@ -34,5 +33,23 @@ api.interceptors.request.use(config => {
   // 必须把config给返回出去，这是请求的一些参数，配置，必须的
   return config;
 });
+
+api.interceptors.response.use(
+  response => {
+    console.log(response);
+    if (response.data.code === -100) {
+      window.location.href = 'http://127.0.0.1:8080/#/login';
+    }
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+  },
+  error => {
+    console.log(error);
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error);
+  },
+);
 
 export default api;

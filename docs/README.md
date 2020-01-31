@@ -38,7 +38,8 @@
 4. lodash
 5. git
 6. axios
-7.
+7. js-md5
+8.
 
 # 启动
 
@@ -130,5 +131,4 @@ mobile-garbage
 1. config.default 中关闭的 csrf 校验，上到服务器应该恢复 https://blog.csdn.net/weixin_43704471/article/details/90763103
 2. 不同页面的 title 应该不同， 需要修改 webpack 中的 html 模板配置
 3. vuex 要存数据，要获取用户登录数据那些
-4. 不同页面，如果没有登录是不可以操作的
-5. 中间件拦截需要增加白名单，同时，不符合规则的页面需要跳转到登录页
+4.

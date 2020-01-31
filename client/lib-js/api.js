@@ -36,16 +36,16 @@ api.interceptors.request.use(config => {
 
 api.interceptors.response.use(
   response => {
-    console.log(response);
     if (response.data.code === -100) {
-      window.location.href = 'http://127.0.0.1:8080/#/login';
+      const { origin } = window.location;
+      // window.location.href = 'http://127.0.0.1:8080/#/login';
+      window.location.href = origin + '#/login';
     }
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     return response;
   },
   error => {
-    console.log(error);
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(error);

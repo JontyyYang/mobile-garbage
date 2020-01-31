@@ -28,6 +28,7 @@
     </div>
     <div class="toRegister" @click="jumpToRegister">没有账号？点我注册</div>
   </div>
+
   <div class="register-container" v-else>
     <div class="register">
       <form>
@@ -53,14 +54,17 @@
 </template>
 
 <script>
-  import { Field, CellGroup, Button, Notify } from 'vant';
+  import { createNamespacedHelpers } from 'vuex';
 
+  import { Field, CellGroup, Button, Notify } from 'vant';
   import md5 from 'js-md5';
 
   import api from 'libjs/api';
   import { validatorLength, validatorTel } from 'libjs/util';
 
   import { UserInfo, RegisterInfo } from './userStateInfo';
+
+  const { mapState: mapUserState, mapActions: mapUserActions } = createNamespacedHelpers('user');
 
   const status = {
     Login: 'login',
@@ -96,17 +100,21 @@
 
         // 注册所需要的信息
         RegisterInfo,
+
         // 登录需要的用户信息
         UserInfo,
 
         // 登录还是注册
         status,
-        // todo
         currentStatus: status.Login,
       };
     },
-
+    computed: {
+      ...mapUserState(['user_info']),
+    },
     methods: {
+      ...mapUserActions(['setUserInfo']),
+
       // 清空当前输入框
       clear(e, type) {
         switch (type) {
@@ -154,7 +162,7 @@
               userPhone,
               userPassword: password,
             },
-            // 需要把cookie待过去
+            // 需要把cookie待过去,现在在apijs里面统一处理
             // withCredentials: true,
           })
           .then(res => {
@@ -162,14 +170,19 @@
               Notify(res.data.message);
               return;
             }
+            let storage = window.localStorage;
+            storage.setItem('userPhone', userPhone);
+            this.setUserInfo(JSON.stringify(res.data.body));
             this.$router.replace('/home');
           });
       },
 
+      // 注册操作
       registerAction() {
         const {
           registerInfo: { userName, userNickname, userPhone, userPassword, userCurrentPassword },
         } = this;
+
         // 想了想，前端这里还是要处理的， 不想什么都丢给后端，前端这里要判定是否为空， 密码是否相等
         const tempArr = [
           {
@@ -193,21 +206,28 @@
             name: '请确认密码哦(*╹▽╹*)',
           },
         ];
+
+        // 遍历提示，避免挨个
         for (let i = 0, j = tempArr.length; i !== j; i++) {
           if (!tempArr[i].value) {
             Notify(tempArr[i].name);
             return;
           }
         }
+
         if (userPassword !== userCurrentPassword) {
           Notify('两次密码必须要一致哦');
           return;
         }
+
         if (!validatorLength(userPassword, 'range', 8, 16)) {
           Notify('密码长度不正确');
           return;
         }
+
+        // md5加密
         const password = md5(userPassword);
+
         api
           .post('/user/register', {
             userName,

@@ -1,21 +1,20 @@
 'use strict';
 module.exports = () => {
-  // 2、返回一个异步的函数
   return async function login(ctx, next) {
     ctx.set('Access-Control-Allow-Credentials', true);
-    // 需要过滤某些端口
+    if (!ctx.request.url.startsWith('/user/login')) {
+      const cookie = ctx.cookies.get('userPhone', {
+        signed: true,
+        encrypt: true,
+      });
+      if (!cookie) {
+        const code = -100,
+          message = '用户没有登录';
+        ctx.body = { code, message };
 
-    // const cookie = ctx.cookies.get('username', {
-    //   signed: true,
-    //   encrypt: true,
-    // });
-    // if (!cookie) {
-    //   const code = -100,
-    //     message = '用户没有登录';
-    //   ctx.body = { code, message };
-
-    //   return;
-    // }
+        return;
+      }
+    }
     await next();
   };
 };

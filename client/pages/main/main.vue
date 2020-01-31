@@ -1,3 +1,8 @@
+<!--
+ * @Author: jontyy
+ * @Date: 2020-01-30 13:35:48
+ * @Description: 主页面
+ -->
 <template>
   <div>
     <van-swipe :autoplay="3000">
@@ -23,7 +28,15 @@
       </div>
     </div>
 
-    <div class="cheerup">加油，本月你战胜了多少用户，所以还可以加个排行榜</div>
+    <div class="cheerup">
+      <div>
+        <div class="cheerup-text">加油！{{ '用户昵称' }}</div>
+        <div>
+          本月你战胜了小区内<span class="cheerup-num"> {{ 199 }} </span>用户啦!
+        </div>
+      </div>
+      <div class="cheerup-userava"></div>
+    </div>
 
     <div class="total">本月总计回收数量</div>
 
@@ -38,6 +51,7 @@
   import { funcItem } from './constant';
 
   Vue.use(Lazyload);
+
   export default {
     name: 'Main',
 
@@ -46,24 +60,33 @@
       [SwipeItem.name]: SwipeItem,
       [Lazyload.name]: Lazyload,
     },
+
+    // 登录的时候立即获取轮播图的数据
     created() {
       api.get('/swiper/img').then(res => {
         this.images = res.data;
       });
     },
+
     data() {
       return {
+        // 轮播图的数据
         images: [],
+        // 函数功能列表
         funcItem,
       };
     },
+
     methods: {
+      // todo
+      // 不同的功能跳转到不同的路由
       jumpTo(url) {
         console.log(url);
       },
     },
   };
 </script>
+
 <style lang="scss">
   .van-swipe {
     height: 2.666667rem /* 200/75 */;
@@ -109,10 +132,30 @@
   }
 
   .cheerup {
-    border-radius: 0.133333rem /* 10/75 */;
+    display: flex;
+    border-radius: 30rem;
     margin: 0.133333rem /* 10/75 */ auto;
     width: 95%;
-    height: 1rem;
-    background: lightblue;
+    padding: 0.2rem /* 15/75 */;
+    background: yellow;
+    box-sizing: border-box;
+    justify-content: space-between;
+
+    &-text {
+      font-size: 0.266667rem /* 20/75 */;
+      margin-bottom: 0.106667rem /* 8/75 */;
+    }
+
+    &-num {
+      background: greenyellow;
+      border-radius: 0.133333rem /* 10/75 */;
+    }
+
+    &-userava {
+      @include size(0.666667rem /* 50/75 */);
+      @include round();
+
+      background: red;
+    }
   }
 </style>

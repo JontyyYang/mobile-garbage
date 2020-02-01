@@ -90,7 +90,7 @@
       // todo
       // 不同的功能跳转到不同的路由
       jumpTo(url) {
-        console.log(url);
+        console.log(url); //eslint-disable-line
       },
     },
   };

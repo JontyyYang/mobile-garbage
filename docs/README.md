@@ -56,8 +56,8 @@
 1. 建议按照 vscod.md 的配置设置一下自己 vscode 的配置， 否则部分属性，比如 eslint 不会生效。
 2. npm 版本 12.14.1
 3. 重要数据走 md5 加密
-
-4) **treer -i "/node_modules|.git|.vscode|yarn-error.log/" -e ./docs/TREE.md** 可以生成项目结构到指定目录下，需要全局安装 treer
+4. **treer -i "/node_modules|.git|.vscode|yarn-error.log/" -e ./docs/TREE.md** 可以生成项目结构到指定目录下，需要全局安装 treer
+5. yarn upgrade-interactive --latest 安装所有依赖包的最新版本
 
 # rem 相关
 

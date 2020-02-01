@@ -1,7 +1,7 @@
 <!--
  * @Author: jontyy
  * @Date: 2020-01-20 16:52:02
- * @Description:登录注册页面
+ * @Description: 登录注册页面
  -->
 
 <template>
@@ -55,9 +55,9 @@
 
 <script>
   import { createNamespacedHelpers } from 'vuex';
-
   import { Field, CellGroup, Button, Notify } from 'vant';
   import md5 from 'js-md5';
+  import cookie from 'js-cookie';
 
   import api from 'libjs/api';
   import { validatorLength, validatorTel } from 'libjs/util';
@@ -162,7 +162,7 @@
               userPhone,
               userPassword: password,
             },
-            // 需要把cookie待过去,现在在apijs里面统一处理
+            // 需要把cookie带过去,现在在apijs里面统一处理
             // withCredentials: true,
           })
           .then(res => {
@@ -170,9 +170,27 @@
               Notify(res.data.message);
               return;
             }
+
+            // 这里本来想用localstorage存储用户信息的，但是也不符合我要求，因为localstorage如果不手动删除是不会删除的，我也不喜欢
             let storage = window.localStorage;
             storage.setItem('userPhone', userPhone);
+            // 想想最后还是用cookie吧，为了避免请求接口带太多的数据，决定只存重要信息
+
+            // 这里主要是为了测试vuex，没什么用，本来想着用vuex保存用户信息，但是刷新页面数据会丢失，临时存到sessionStorage中感觉不合理
             this.setUserInfo(JSON.stringify(res.data.body));
+            // 但是的确是vuex的一个应用，所以就不删除了
+
+            // 这里仍然是一个测试，因为保存时间问题，如果默认，就是浏览器关闭自动删除，设置的话就喝后端设置的cookie不一致，所以干脆用后端的。
+            const cookieInfo = {
+              user_name: res.data.body.user_name,
+              user_phone: res.data.body.user_phone,
+              user_state: res.data.body.user_state,
+              user_id: res.data.body.user_id,
+              user_ava: res.data.body.user_ava,
+            };
+            cookie.set('jscookieTest', cookieInfo);
+            //  至于用户的昵称。电话展示，还是通过接口展示吧
+
             this.$router.replace('/home');
           });
       },

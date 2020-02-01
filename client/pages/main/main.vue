@@ -30,12 +30,14 @@
 
     <div class="cheerup">
       <div>
-        <div class="cheerup-text">加油！{{ '用户昵称' }}</div>
+        <div class="cheerup-text">加油！{{ userNickname }}</div>
         <div>
           本月你战胜了小区内<span class="cheerup-num"> {{ 199 }} </span>用户啦!
         </div>
       </div>
-      <div class="cheerup-userava"></div>
+      <div class="cheerup-userava">
+        <img :src="userAva" alt="" />
+      </div>
     </div>
 
     <div class="total">本月总计回收数量</div>
@@ -48,6 +50,7 @@
   import { Swipe, SwipeItem, Lazyload } from 'vant';
 
   import api from 'libjs/api';
+  import ava from 'libimg/avator.jpg';
   import { funcItem } from './constant';
 
   Vue.use(Lazyload);
@@ -64,7 +67,9 @@
     // 登录的时候立即获取轮播图的数据
     created() {
       api.get('/swiper/img').then(res => {
-        this.images = res.data;
+        this.images = res.data.imgData;
+        this.userNickname = res.data.userShowInfo.user_nickname;
+        this.userAva = res.data.userShowInfo.user_ava ? res.data.userShowInfo.user_ava : ava;
       });
     },
 
@@ -74,6 +79,10 @@
         images: [],
         // 函数功能列表
         funcItem,
+        // 用户昵称
+        userNickname: '',
+        // 用户头像
+        userAva: '',
       };
     },
 
@@ -156,6 +165,11 @@
       @include round();
 
       background: red;
+
+      img {
+        @include fullFill();
+        @include round();
+      }
     }
   }
 </style>

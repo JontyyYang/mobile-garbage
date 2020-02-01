@@ -39,7 +39,8 @@
 5. git
 6. axios
 7. js-md5
-8.
+8. js-cookie
+9.
 
 # 启动
 
@@ -131,4 +132,5 @@ mobile-garbage
 1. config.default 中关闭的 csrf 校验，上到服务器应该恢复 https://blog.csdn.net/weixin_43704471/article/details/90763103
 2. 不同页面的 title 应该不同， 需要修改 webpack 中的 html 模板配置
 3. vuex 要存数据，要获取用户登录数据那些
-4.
+4. 战胜小区多少用户需要后期制作
+5. 用户头像需要后期完善

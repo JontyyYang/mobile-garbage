@@ -30,7 +30,7 @@ class UserController extends Controller {
     } else {
       body = res;
     }
-    ctx.cookies.set('userPhone', userPhone, {
+    ctx.cookies.set('userInfo', JSON.stringify(res), {
       maxAge: 1 * 3600 * 1000,
       httpOnly: true,
       signed: true,

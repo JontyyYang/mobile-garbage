@@ -9,5 +9,7 @@ module.exports = app => {
   router.get('/user/login', controller.user.user.login);
   router.post('/user/register', controller.user.user.register);
 
+  router.post('/manage/manage', controller.manage.manage.login);
+
   router.get('/swiper/img', controller.swiper.swiper.getImg);
 };

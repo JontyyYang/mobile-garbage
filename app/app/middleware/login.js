@@ -2,7 +2,10 @@
 module.exports = () => {
   return async function login(ctx, next) {
     ctx.set('Access-Control-Allow-Credentials', true);
-    if (!ctx.request.url.startsWith('/user/login')) {
+    if (
+      !ctx.request.url.startsWith('/user/login') &&
+      !ctx.request.url.startsWith('/manage/manage')
+    ) {
       const cookie = ctx.cookies.get('userInfo', {
         signed: true,
         encrypt: true,

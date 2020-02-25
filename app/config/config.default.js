@@ -26,12 +26,14 @@ module.exports = appInfo => {
       enable: false,
     },
     // eslint-disable-next-line
-    domainWhiteList: ['http://127.0.0.1:8080'],
+    domainWhiteList: ['http://127.0.0.1:8080', 'http://127.0.0.1:8000'],
+    // domainWhiteList: ['*'],
   };
 
   config.cors = {
     domainWhiteList: {
-      origin: 'http://127.0.0.1:8080',
+      origin: ['http://127.0.0.1:8080', 'http://127.0.0.1:8000'],
+      // origin: '*',
       credentials: true,
       allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
     },

@@ -1,6 +1,7 @@
 'use strict';
 
 const { Controller } = require('egg');
+// const { output } = require('../../../constant');
 
 const LoginType = {
   ACCOUNT: 'account',
@@ -34,15 +35,25 @@ class ManageController extends Controller {
       message = '登录成功';
     if (type === LoginType.ACCOUNT) {
       data = await this.findByManageName(userName);
-      if (password !== data.manage_password) {
+      if (data) {
+        if (password !== data.manage_password) {
+          code = -1;
+          message = '登录失败';
+        }
+      } else {
         code = -1;
-        message = '登录失败';
+        message = '不存在该用户';
       }
     } else {
       data = await this.findByManageMobile(mobile);
-      if (captcha !== data.manage_captcha) {
+      if (data) {
+        if (captcha !== data.manage_captcha) {
+          code = -1;
+          message = '登录失败';
+        }
+      } else {
         code = -1;
-        message = '登录失败';
+        message = '手机不存在';
       }
     }
     if (code === 0) {

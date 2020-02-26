@@ -10,7 +10,11 @@ module.exports = () => {
         signed: true,
         encrypt: true,
       });
-      if (!cookie) {
+      const pcCookie = ctx.cookies.get('manageInfo', {
+        signed: false,
+        encrypt: false,
+      });
+      if (!cookie || pcCookie) {
         const code = -100,
           message = '用户没有登录';
         ctx.body = { code, message };

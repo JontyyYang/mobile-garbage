@@ -17,7 +17,7 @@ class ManageController extends Controller {
 
   async findByManageMobile(manageMobile) {
     const { ctx } = this;
-    const manage = await ctx.service.manage.findByManageMobile(manageMobile);
+    const manage = await ctx.service.manage.manage.findByManageMobile(manageMobile);
     return manage;
   }
 
@@ -45,7 +45,14 @@ class ManageController extends Controller {
         message = '登录失败';
       }
     }
-
+    if (code === 0) {
+      ctx.cookies.set('manageInfo', JSON.stringify(data), {
+        maxAge: 1 * 3600 * 1000,
+        domain: '127.0.0.1',
+        signed: false,
+        httpOnly: false,
+      });
+    }
     ctx.body = { code, data, message };
   }
 }

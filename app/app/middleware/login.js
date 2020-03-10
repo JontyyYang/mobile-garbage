@@ -14,7 +14,7 @@ module.exports = () => {
         signed: false,
         encrypt: false,
       });
-      if (!cookie || pcCookie) {
+      if (!cookie && !pcCookie) {
         const code = -100,
           message = '用户没有登录';
         ctx.body = { code, message };

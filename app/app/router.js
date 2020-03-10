@@ -17,4 +17,11 @@ module.exports = app => {
 
   // 管理端登录界面
   router.post('/manage/manage', controller.manage.manage.login);
+
+  // 管理端增加新闻接口
+  router.post('/newsList/addNewlist', controller.newsList.newsList.addNewsList);
+  // 管理端查找新闻接口
+  router.get('/newsList/getNewList', controller.newsList.newsList.getNewsList);
+  // 管理端删除某个新闻
+  router.post('/newsList/deleteNews', controller.newsList.newsList.deleteNewsList);
 };

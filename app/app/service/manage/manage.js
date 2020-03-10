@@ -10,7 +10,6 @@ class ManageService extends Service {
 
   async findByManageMobile(manageMobile) {
     const manage = this.app.mysql.get('manage_info', { manage_phone: manageMobile });
-    console.log(manage);
     return manage;
   }
 }

@@ -42,7 +42,19 @@
 
     <div class="total">本月总计回收数量</div>
 
-    <div class="news">新闻</div>
+    <div class="newsList">
+      <div v-for="item in newsList" :key="item.id" class="newsList-item" @click="lookMore(item.id)">
+        <!-- {{ item }} -->
+        <div class="newsList-item-pic">
+          <img :src="item.news_picurl ? item.news_picurl : userAva" alt="" />
+        </div>
+        <div class="newsList-item-container">
+          <div class="newsList-item-title">标题：{{ item.news_title }}</div>
+          <div class="newsList-item-content" v-html="`${item.news_info}`"></div>
+          <div class="newsList-item-content">时间：{{ item.news_time }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -50,6 +62,8 @@
   import { Swipe, SwipeItem, Lazyload } from 'vant';
 
   import api from 'libjs/api';
+  import { formatTime } from 'libjs/util';
+
   import ava from 'libimg/avator.jpg';
   import { funcItem } from './constant';
 
@@ -64,12 +78,20 @@
       [Lazyload.name]: Lazyload,
     },
 
-    // 登录的时候立即获取轮播图的数据
     created() {
+      // 登录的时候立即获取轮播图的数据
       api.get('/swiper/img').then(res => {
         this.images = res.data.imgData;
         this.userNickname = res.data.userShowInfo.user_nickname;
         this.userAva = res.data.userShowInfo.user_ava ? res.data.userShowInfo.user_ava : ava;
+      });
+
+      // 同时获取新闻数据
+      api.get('./newsList/getNewList').then(res => {
+        res.data.data.forEach(element => {
+          element.news_time = formatTime(element.news_time);
+        });
+        this.newsList = res.data.data;
       });
     },
 
@@ -83,6 +105,8 @@
         userNickname: '',
         // 用户头像
         userAva: '',
+        // 新闻
+        newsList: [],
       };
     },
 
@@ -90,86 +114,15 @@
       // todo
       // 不同的功能跳转到不同的路由
       jumpTo(url) {
-        console.log(url); //eslint-disable-line
+      console.log(url); //eslint-disable-line
+      },
+      lookMore(id) {
+        this.$router.push({ path: '/newsDetail', query: { id: id } });
       },
     },
   };
 </script>
 
 <style lang="scss">
-  .van-swipe {
-    height: 2.666667rem /* 200/75 */;
-  }
-
-  .van-swipe-item {
-    height: 2.666667rem /* 200/75 */;
-
-    img {
-      @include fullFill();
-    }
-  }
-
-  .func {
-    @include displayCenter();
-
-    width: 100%;
-    margin-top: 0.4rem; /* 30/75 */
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 0.2rem /* 15/75 */;
-
-    &-item {
-      @include displayCenter();
-
-      flex: 1;
-      flex-wrap: wrap;
-    }
-
-    &-img {
-      @include size(0.666667rem /* 50/75 */);
-
-      display: flex;
-
-      img {
-        @include fullFill();
-        @include round();
-      }
-    }
-
-    &-title {
-      margin-top: 0.133333rem /* 10/75 */;
-    }
-  }
-
-  .cheerup {
-    display: flex;
-    border-radius: 30rem;
-    margin: 0.133333rem /* 10/75 */ auto;
-    width: 95%;
-    padding: 0.2rem /* 15/75 */;
-    background: yellow;
-    box-sizing: border-box;
-    justify-content: space-between;
-
-    &-text {
-      font-size: 0.266667rem /* 20/75 */;
-      margin-bottom: 0.106667rem /* 8/75 */;
-    }
-
-    &-num {
-      background: greenyellow;
-      border-radius: 0.133333rem /* 10/75 */;
-    }
-
-    &-userava {
-      @include size(0.666667rem /* 50/75 */);
-      @include round();
-
-      background: red;
-
-      img {
-        @include fullFill();
-        @include round();
-      }
-    }
-  }
+  @import './index.scss';
 </style>

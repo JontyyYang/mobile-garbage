@@ -1,0 +1,105 @@
+.van-swipe {
+  height: 2.666667rem /* 200/75 */;
+}
+
+.van-swipe-item {
+  height: 2.666667rem /* 200/75 */;
+
+  img {
+    @include fullFill();
+  }
+}
+
+.func {
+  @include displayCenter();
+
+  width: 100%;
+  margin-top: 0.4rem; /* 30/75 */
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.2rem /* 15/75 */;
+
+  &-item {
+    @include displayCenter();
+
+    flex: 1;
+    flex-wrap: wrap;
+  }
+
+  &-img {
+    @include size(0.666667rem /* 50/75 */);
+
+    display: flex;
+
+    img {
+      @include fullFill();
+      @include round();
+    }
+  }
+
+  &-title {
+    margin-top: 0.133333rem /* 10/75 */;
+  }
+}
+
+.cheerup {
+  display: flex;
+  border-radius: 30rem;
+  margin: 0.133333rem /* 10/75 */ auto;
+  width: 95%;
+  padding: 0.2rem /* 15/75 */;
+  background: yellow;
+  box-sizing: border-box;
+  justify-content: space-between;
+
+  &-text {
+    font-size: 0.266667rem /* 20/75 */;
+    margin-bottom: 0.106667rem /* 8/75 */;
+  }
+
+  &-num {
+    background: greenyellow;
+    border-radius: 0.133333rem /* 10/75 */;
+  }
+
+  &-userava {
+    @include size(0.666667rem /* 50/75 */);
+    @include round();
+
+    background: red;
+
+    img {
+      @include fullFill();
+      @include round();
+    }
+  }
+}
+
+.newsList {
+  padding: 0.2rem 0.2rem 0.533333rem /* 40/75 */;
+
+  &-item {
+    margin-bottom: 0.2rem /* 15/75 */;
+    display: flex;
+
+    &-title {
+      height: 0.253333rem /* 19/75 */;
+      line-height: 0.253333rem /* 19/75 */;
+
+      @include ellipsis();
+    }
+
+    &-content {
+      height: 0.56rem /* 42/75 */;
+      line-height: 0.28rem /* 21/75 */;
+      margin-top: 0.066667rem /* 5/75 */;
+      margin-bottom: 5px;
+
+      @include line-clamp(2);
+    }
+  }
+
+  img {
+    @include size(2rem /* 150/75 */, 1.2rem /* 90/75 */);
+    // @include round();
+  }
+}

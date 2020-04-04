@@ -12,7 +12,11 @@ class NewsList extends Controller {
         request: { body: body },
       },
     } = this;
-    const { title, writename, picurl, info } = body.data;
+    const { title, writename, info } = body.data;
+    let { picurl } = body.data;
+    if (picurl === '图片地址') {
+      picurl = '';
+    }
     const result = await ctx.service.newsList.newsList.addNewsList({
       title,
       writename,
@@ -57,6 +61,25 @@ class NewsList extends Controller {
       finalData.code = -1;
       finalData.data = result;
       finalData.message = '删除新闻失败，请重试';
+    }
+    ctx.body = finalData;
+  }
+
+  async getNews() {
+    const finalData = output();
+    const {
+      ctx,
+      ctx: { query },
+    } = this;
+    const { newsId } = query;
+    const result = await ctx.service.newsList.newsList.getNews(newsId);
+    if (result) {
+      finalData.data = result;
+      finalData.message = '查询具体新闻成功';
+    } else {
+      finalData.code = -1;
+      finalData.data = result;
+      finalData.message = '查询新闻失败，请重试';
     }
     ctx.body = finalData;
   }

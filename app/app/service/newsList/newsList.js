@@ -28,5 +28,14 @@ class NewsListService extends Service {
     const result = await this.app.mysql.update('news_info', row);
     return result.affectedRows === 1;
   }
+
+  async getNews(newsId) {
+    // const manage = this.app.mysql.get('manage_info', { manage_phone: manageMobile });
+    // return manage;
+    const news = this.app.mysql.get('news_info', {
+      id: newsId,
+    });
+    return news;
+  }
 }
 module.exports = NewsListService;

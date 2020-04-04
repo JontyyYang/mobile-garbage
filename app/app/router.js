@@ -24,4 +24,6 @@ module.exports = app => {
   router.get('/newsList/getNewList', controller.newsList.newsList.getNewsList);
   // 管理端删除某个新闻
   router.post('/newsList/deleteNews', controller.newsList.newsList.deleteNewsList);
+  // 根据新闻id查新闻
+  router.get('/newsList/getNews', controller.newsList.newsList.getNews);
 };

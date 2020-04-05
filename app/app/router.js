@@ -14,6 +14,12 @@ module.exports = app => {
 
   // 获取轮播图接口
   router.get('/swiper/img', controller.swiper.swiper.getImg);
+  // 增加轮播图接口
+  router.post('/swiper/addSwiper', controller.swiper.swiper.addImg);
+  // 删除轮播图接口
+  router.post('/swiper/deleteSwiper', controller.swiper.swiper.deleteImg);
+  // 编辑轮播图接口
+  router.post('/swiper/editSwiper', controller.swiper.swiper.editSwiper);
 
   // 管理端登录界面
   router.post('/manage/manage', controller.manage.manage.login);

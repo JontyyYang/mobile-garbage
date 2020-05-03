@@ -80,14 +80,14 @@
 
     created() {
       // 登录的时候立即获取轮播图的数据
-      api.get('/swiper/img').then(res => {
+      api.get('/mobile/swiper/img').then(res => {
         this.images = res.data.imgData;
         this.userNickname = res.data.userShowInfo.user_nickname;
         this.userAva = res.data.userShowInfo.user_ava ? res.data.userShowInfo.user_ava : ava;
       });
 
       // 同时获取新闻数据
-      api.get('./newsList/getNewList').then(res => {
+      api.get('/mobile/newsList/getNewList').then(res => {
         res.data.data.forEach(element => {
           element.news_time = formatTime(element.news_time);
         });

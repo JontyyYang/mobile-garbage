@@ -14,6 +14,9 @@ module.exports = app => {
 
   // 获取轮播图接口
   router.get('/swiper/img', controller.swiper.swiper.getImg);
+  // 管理端获取轮播图接口， 不应该这样写的。。 但是一开始的架构有问题， 导致移动端是有用户数据的， 但是客户端是没有的， 用同一个接口会报错
+  router.get('/swiper/getPcImg', controller.swiper.swiper.getPcImg);
+
   // 增加轮播图接口
   router.post('/swiper/addSwiper', controller.swiper.swiper.addImg);
   // 删除轮播图接口

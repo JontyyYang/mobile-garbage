@@ -16,7 +16,11 @@ class NewsListService extends Service {
   }
 
   async getNewsList() {
-    const result = await this.app.mysql.select('news_info');
+    const result = await this.app.mysql.select('news_info', {
+      where: {
+        is_delete: 0,
+      },
+    });
     return result;
   }
 

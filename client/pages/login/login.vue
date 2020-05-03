@@ -157,7 +157,7 @@
           return;
         }
         api
-          .get('/user/login', {
+          .get('/mobile/user/login', {
             params: {
               userPhone,
               userPassword: password,
@@ -247,7 +247,7 @@
         const password = md5(userPassword);
 
         api
-          .post('/user/register', {
+          .post('/mobile/user/register', {
             userName,
             userNickname,
             userPhone,

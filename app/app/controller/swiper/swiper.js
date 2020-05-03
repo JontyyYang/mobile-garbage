@@ -22,6 +22,21 @@ class SwiperController extends Controller {
     ctx.body = { imgData, code, userShowInfo };
   }
 
+  async getPcImg() {
+    const { ctx } = this;
+    const finalData = output();
+    const imgData = await ctx.service.swiper.swiper.getImg();
+    if (!imgData) {
+      finalData.code = -1;
+      finalData.data = imgData;
+      finalData.message = '查询广告失败';
+    } else {
+      finalData.data = imgData;
+      finalData.message = '查询广告成功';
+    }
+    ctx.body = finalData;
+  }
+
   async addImg() {
     const finalData = output();
     const {

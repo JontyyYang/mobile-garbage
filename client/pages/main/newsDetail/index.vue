@@ -18,7 +18,7 @@
     },
     created() {
       api
-        .get('/newsList/getNews', {
+        .get('/mobile/newsList/getNews', {
           params: {
             newsId: this.$route.query.id,
           },

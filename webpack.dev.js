@@ -13,6 +13,13 @@ module.exports = merge(common(), {
   devServer: {
     contentBase: './dist',
     hot: true,
+    proxy: {
+      '/mobile': {
+        target: 'http://127.0.0.1:7001/',
+        changeOrigin: true,
+        pathRewrite: { '^/mobile': '' },
+      },
+    },
   },
   module: {
     rules: [

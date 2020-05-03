@@ -35,4 +35,9 @@ module.exports = app => {
   router.post('/newsList/deleteNews', controller.newsList.newsList.deleteNewsList);
   // 根据新闻id查新闻
   router.get('/newsList/getNews', controller.newsList.newsList.getNews);
+
+  // 管理端增加商品接口
+  router.post('/good/addGoods', controller.good.good.addGood);
+  // 查询商品接口
+  router.get('/good/getGoods', controller.good.good.getGood);
 };

@@ -40,4 +40,10 @@ module.exports = app => {
   router.post('/good/addGoods', controller.good.good.addGood);
   // 查询商品接口
   router.get('/good/getGoods', controller.good.good.getGood);
+  // 删除某商品的接口
+  router.post('/good/deleteGoods', controller.good.good.deleteGood);
+  // 获取单个商品接口
+  router.get('/good/getOneGood', controller.good.good.getOneGood);
+  // 更新商品接口
+  router.post('/good/updateGoods', controller.good.good.updateGoods);
 };

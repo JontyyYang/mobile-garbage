@@ -188,7 +188,7 @@
               user_id: res.data.body.user_id,
               user_ava: res.data.body.user_ava,
             };
-            cookie.set('jscookieTest', cookieInfo);
+            cookie.set('jscookieTest', JSON.stringify(cookieInfo));
             //  至于用户的昵称。电话展示，还是通过接口展示吧
 
             this.$router.replace('/home');

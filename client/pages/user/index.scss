@@ -1,0 +1,14 @@
+.userInfo-container {
+  @include size(100%, 80px);
+
+  display: flex;
+  margin-bottom: 0.266667rem /* 20/75 */;
+  padding: 0.266667rem /* 20/75 */;
+}
+
+.userInfo-info {
+  margin-left: 0.266667rem /* 20/75 */;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

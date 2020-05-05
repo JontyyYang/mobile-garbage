@@ -36,6 +36,10 @@ const routes = [
     ],
   },
   {
+    path: '/home/shop/goodsDetail',
+    component: () => import('./pages/shop/goodDetail/goodDetail.vue'),
+  },
+  {
     path: '*',
     component: () => import('./pages/login/login.vue'),
   },

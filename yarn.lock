@@ -8734,10 +8734,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^2.4.5:
-  version "2.4.5"
-  resolved "http://registry.npm.qima-inc.com/vant/download/vant-2.4.5.tgz#3cf3e4c3c5ab8096f2e3674b940a7aeff47705c2"
-  integrity sha1-PPPkw8WrgJby42dLlAp67/R3BcI=
+vant@2.7.1:
+  version "2.7.1"
+  resolved "http://registry.npm.qima-inc.com/vant/download/vant-2.7.1.tgz#6989db0851a6a383eee9368f19af911214194cc3"
+  integrity sha1-aYnbCFGmo4Pu6TaPGa+REhQZTMM=
   dependencies:
     "@babel/runtime" "7.x"
     "@vant/icons" "1.2.1"

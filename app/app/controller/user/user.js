@@ -1,6 +1,7 @@
 'use strict';
 
 const { Controller } = require('egg');
+const { output } = require('../../../constant');
 
 class UserController extends Controller {
   // 查找用户
@@ -8,6 +9,25 @@ class UserController extends Controller {
     const { ctx } = this;
     const user = await ctx.service.user.user.find(userPhone);
     return user;
+  }
+
+  async findById() {
+    const finalData = output();
+    const {
+      ctx,
+      ctx: { query },
+    } = this;
+    const { userId } = query;
+    const result = await ctx.service.user.user.findById(userId);
+    if (result) {
+      finalData.data = result;
+      finalData.message = '查询单个商品成功';
+    } else {
+      finalData.code = -1;
+      finalData.data = result;
+      finalData.message = '查询单个商品失败， 错误结果未知，请重试';
+    }
+    ctx.body = finalData;
   }
 
   // 登录函数
@@ -77,6 +97,27 @@ class UserController extends Controller {
       data: body,
       message,
     };
+  }
+
+  async updateUser() {
+    const finalData = output();
+    const {
+      ctx,
+      ctx: {
+        request: { body: body },
+      },
+    } = this;
+    ctx.body = body;
+    const result = await ctx.service.user.user.updateUser(body.value);
+    if (result) {
+      finalData.data = result;
+      finalData.message = '更新用户信息成功';
+    } else {
+      finalData.code = -1;
+      finalData.data = result;
+      finalData.message = '更新用户信息失败， 错误结果未知，请重试';
+    }
+    ctx.body = finalData;
   }
 }
 

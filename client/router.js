@@ -40,6 +40,14 @@ const routes = [
     component: () => import('./pages/shop/goodDetail/goodDetail.vue'),
   },
   {
+    path: '/home/user/basicInfo',
+    component: () => import('./pages/user/basic-info/basic-info.vue'),
+  },
+  {
+    path: '/home/user/areaList',
+    component: () => import('./pages/user/choose-area/area-list.vue'),
+  },
+  {
     path: '*',
     component: () => import('./pages/login/login.vue'),
   },

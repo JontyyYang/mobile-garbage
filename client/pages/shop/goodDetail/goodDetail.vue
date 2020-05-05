@@ -1,5 +1,14 @@
 <template>
   <div>
+    <van-nav-bar
+      title="商品页"
+      left-text="返回"
+      right-text=""
+      left-arrow
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
+    />
+
     <van-card
       :num="goodInfo.good_num"
       :price="goodInfo.good_price"
@@ -7,6 +16,7 @@
       :title="goodInfo.good_name"
       :thumb="goodInfo.good_img"
     />
+
     <van-submit-bar
       :price="Number.parseInt(goodInfo.good_price) * 100"
       button-text="提交订单"
@@ -15,7 +25,7 @@
   </div>
 </template>
 <script>
-  import { Card, SubmitBar, Dialog } from 'vant';
+  import { Card, SubmitBar, Dialog, NavBar } from 'vant';
   import api from 'libjs/api';
 
   export default {
@@ -23,8 +33,11 @@
 
     components: {
       [Card.name]: Card,
+
       [SubmitBar.name]: SubmitBar,
+
       [Dialog.name]: Dialog,
+      [NavBar.name]: NavBar,
     },
 
     data() {
@@ -62,6 +75,12 @@
             // on cancel
           });
       },
+
+      onClickLeft() {
+        this.$router.back();
+      },
+
+      onClickRight() {},
     },
   };
 </script>

@@ -182,6 +182,7 @@
 
             // 这里仍然是一个测试，因为保存时间问题，如果默认，就是浏览器关闭自动删除，设置的话就喝后端设置的cookie不一致，所以干脆用后端的。
             const cookieInfo = {
+              user_nickname: res.data.body.user_nickname,
               user_name: res.data.body.user_name,
               user_phone: res.data.body.user_phone,
               user_state: res.data.body.user_state,

@@ -7,10 +7,14 @@ module.exports = app => {
   const { router, controller } = app;
   // 通过电话查用户
   router.get('/user/user', controller.user.user.findByTel);
+  // 通过id查用户
+  router.get('/user/getUser', controller.user.user.findById);
   // 用户登录接口
   router.get('/user/login', controller.user.user.login);
   // 用户注册接口
   router.post('/user/register', controller.user.user.register);
+  // 用户信息更新接口
+  router.post('/user/updateUser', controller.user.user.updateUser);
 
   // 获取轮播图接口
   router.get('/swiper/img', controller.swiper.swiper.getImg);

@@ -48,6 +48,26 @@ const routes = [
     component: () => import('./pages/user/choose-area/area-list.vue'),
   },
   {
+    path: '/home/user/addArea',
+    component: () => import('./pages/user/add-area/add-area.vue'),
+  },
+  {
+    path: '/home/user/editArea',
+    component: () => import('./pages/user/edit-area/edit-area.vue'),
+  },
+  {
+    path: '/home/user/time',
+    component: () => import('./pages/user/time/time.vue'),
+  },
+  {
+    path: '/home/user/password',
+    component: () => import('./pages/user/password/password.vue'),
+  },
+  {
+    path: '/otherhome',
+    component: () => import('./pages/user/password/password.vue'),
+  },
+  {
     path: '*',
     component: () => import('./pages/login/login.vue'),
   },

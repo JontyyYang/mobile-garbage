@@ -51,4 +51,21 @@ module.exports = app => {
   router.get('/good/getOneGood', controller.good.good.getOneGood);
   // 更新商品接口
   router.post('/good/updateGoods', controller.good.good.updateGoods);
+
+  // 增加用户地址接口
+  router.post('/user/addArea', controller.user.user.addArea);
+  // 获取用户地址接口
+  router.get('/user/getArea', controller.user.user.getArea);
+  // 获取某一个地址的信息信息
+  router.get('/user/getOneArea', controller.user.user.getOneArea);
+  // 更新某一个地址信息
+  router.post('/user/updateArea', controller.user.user.updateArea);
+
+  // 设置时间
+  router.post('/time/updateTime', controller.time.time.updateTime);
+  // 获取时间
+  router.get('/time/getTime', controller.time.time.getTime);
+
+  // 重设密码
+  router.post('/password/resetPassword', controller.password.password.resetPassword);
 };

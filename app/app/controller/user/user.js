@@ -107,7 +107,6 @@ class UserController extends Controller {
         request: { body: body },
       },
     } = this;
-    ctx.body = body;
     const result = await ctx.service.user.user.updateUser(body.value);
     if (result) {
       finalData.data = result;
@@ -116,6 +115,85 @@ class UserController extends Controller {
       finalData.code = -1;
       finalData.data = result;
       finalData.message = '更新用户信息失败， 错误结果未知，请重试';
+    }
+    ctx.body = finalData;
+  }
+
+  // 增加地址信息
+  async addArea() {
+    const finalData = output();
+    const {
+      ctx,
+      ctx: {
+        request: { body: body },
+      },
+    } = this;
+    const result = await ctx.service.user.user.addArea(body);
+    if (result) {
+      finalData.data = result;
+      finalData.message = '增加用户地址信息成功';
+    } else {
+      finalData.code = -1;
+      finalData.data = result;
+      finalData.message = '增加用户地址信息失败， 错误结果未知，请重试';
+    }
+    ctx.body = finalData;
+  }
+
+  async getArea() {
+    const finalData = output();
+    const {
+      ctx,
+      ctx: { query },
+    } = this;
+    const { user_id: userId } = query;
+    const result = await ctx.service.user.user.getArea(userId);
+    if (result) {
+      finalData.data = result;
+      finalData.message = '查询地址成功';
+    } else {
+      finalData.code = -1;
+      finalData.data = result;
+      finalData.message = '查询地址失败， 错误结果未知，请重试';
+    }
+    ctx.body = finalData;
+  }
+
+  async getOneArea() {
+    const finalData = output();
+    const {
+      ctx,
+      ctx: { query },
+    } = this;
+    const { area_id } = query;
+    const result = await ctx.service.user.user.getOneArea(area_id);
+    if (result) {
+      finalData.data = result;
+      finalData.message = '查询单个地址成功';
+    } else {
+      finalData.code = -1;
+      finalData.data = result;
+      finalData.message = '查询单个地址失败， 错误结果未知，请重试';
+    }
+    ctx.body = finalData;
+  }
+
+  async updateArea() {
+    const finalData = output();
+    const {
+      ctx,
+      ctx: {
+        request: { body: body },
+      },
+    } = this;
+    const result = await ctx.service.user.user.updateArea(body);
+    if (result) {
+      finalData.data = result;
+      finalData.message = '增加用户地址信息成功';
+    } else {
+      finalData.code = -1;
+      finalData.data = result;
+      finalData.message = '增加用户地址信息失败， 错误结果未知，请重试';
     }
     ctx.body = finalData;
   }

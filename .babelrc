@@ -5,6 +5,7 @@
       "libraryName": "vant",
       "libraryDirectory": "es",
       "style": true
-    }]
+    }],
+    "@babel/plugin-transform-runtime"
   ]
 }

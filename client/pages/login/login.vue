@@ -193,7 +193,7 @@
             //  至于用户的昵称。电话展示，还是通过接口展示吧
             if (res.data.body.user_state) {
               // TODO
-              // this.$router.replace('/otherhome');
+              this.$router.replace('/otherhome');
               return;
             }
             this.$router.replace('/home');

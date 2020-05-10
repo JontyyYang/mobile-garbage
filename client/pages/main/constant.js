@@ -18,7 +18,7 @@ export const funcItem = [
   {
     funcName: '呼叫服务',
     funcImg: service,
-    funcUrl: './c',
+    funcUrl: 'callService',
   },
   {
     funcName: '客服中心',
@@ -31,3 +31,7 @@ export const funcItem = [
     funcUrl: './e',
   },
 ];
+
+export const functionName = {
+  callService: 'callService',
+};

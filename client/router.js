@@ -65,7 +65,7 @@ const routes = [
   },
   {
     path: '/otherhome',
-    component: () => import('./pages/user/password/password.vue'),
+    component: () => import('./pages/otherhome/other-home.vue'),
   },
   {
     path: '*',

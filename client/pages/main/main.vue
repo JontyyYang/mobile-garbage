@@ -59,13 +59,13 @@
 </template>
 <script>
   import Vue from 'vue';
-  import { Swipe, SwipeItem, Lazyload } from 'vant';
+  import { Swipe, SwipeItem, Lazyload, Dialog } from 'vant';
 
   import api from 'libjs/api';
   import { formatTime } from 'libjs/util';
 
   import ava from 'libimg/avator.jpg';
-  import { funcItem } from './constant';
+  import { funcItem, functionName } from './constant';
 
   Vue.use(Lazyload);
 
@@ -76,6 +76,7 @@
       [Swipe.name]: Swipe,
       [SwipeItem.name]: SwipeItem,
       [Lazyload.name]: Lazyload,
+      [Dialog.name]: Dialog,
     },
 
     created() {
@@ -113,8 +114,22 @@
     methods: {
       // todo
       // 不同的功能跳转到不同的路由
-      jumpTo(url) {
-      console.log(url); //eslint-disable-line
+      jumpTo(name) {
+        console.log(name); //eslint-disable-line
+        if (name === functionName.callService) {
+          Dialog.confirm({
+            title: '呼唤工作人员',
+            message: '确定开始呼唤工作人员吗',
+          })
+            .then(() => {
+              // on confirm
+              // 请求数据
+            })
+            .catch(() => {
+              // on cancel
+              // 取消就当无事发生
+            });
+        }
       },
       lookMore(id) {
         this.$router.push({ path: '/newsDetail', query: { id: id } });

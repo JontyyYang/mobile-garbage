@@ -59,13 +59,14 @@
 </template>
 <script>
   import Vue from 'vue';
-  import { Swipe, SwipeItem, Lazyload, Dialog } from 'vant';
+  import { Swipe, SwipeItem, Lazyload, Dialog, Toast } from 'vant';
 
   import api from 'libjs/api';
   import { formatTime } from 'libjs/util';
 
   import ava from 'libimg/avator.jpg';
   import { funcItem, functionName } from './constant';
+  import cookie from 'js-cookie';
 
   Vue.use(Lazyload);
 
@@ -77,6 +78,7 @@
       [SwipeItem.name]: SwipeItem,
       [Lazyload.name]: Lazyload,
       [Dialog.name]: Dialog,
+      [Toast.name]: Toast,
     },
 
     created() {
@@ -115,7 +117,6 @@
       // todo
       // 不同的功能跳转到不同的路由
       jumpTo(name) {
-        console.log(name); //eslint-disable-line
         if (name === functionName.callService) {
           Dialog.confirm({
             title: '呼唤工作人员',
@@ -124,6 +125,18 @@
             .then(() => {
               // on confirm
               // 请求数据
+
+              api
+                .post('/mobile/askOrder', {
+                  order_time: new Date(),
+                  user_id: JSON.parse(cookie.get('jscookieTest')).user_id,
+                  status: 1,
+                })
+                .then(res => {
+                  if (res.data.code === 0) {
+                    Toast('已经呼唤工作人员，请耐心等待');
+                  }
+                });
             })
             .catch(() => {
               // on cancel

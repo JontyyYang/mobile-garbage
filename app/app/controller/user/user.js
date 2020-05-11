@@ -197,6 +197,25 @@ class UserController extends Controller {
     }
     ctx.body = finalData;
   }
+
+  async getOneAreaById() {
+    const finalData = output();
+    const {
+      ctx,
+      ctx: { query },
+    } = this;
+    const { userId } = query;
+    const result = await ctx.service.user.user.getOneAreaById(userId);
+    if (result) {
+      finalData.data = result;
+      finalData.message = '查询单个地址成功';
+    } else {
+      finalData.code = -1;
+      finalData.data = result;
+      finalData.message = '查询单个地址失败， 错误结果未知，请重试';
+    }
+    ctx.body = finalData;
+  }
 }
 
 module.exports = UserController;

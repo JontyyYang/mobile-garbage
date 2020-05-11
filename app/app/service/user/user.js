@@ -71,6 +71,12 @@ class UserService extends Service {
     return result;
   }
 
+  async getOneAreaById(user_id) {
+    console.log(user_id);
+
+    const result = await this.app.mysql.get('user_address', { user_id });
+    return result;
+  }
   async updateArea(value) {
     const {
       addressDetail,

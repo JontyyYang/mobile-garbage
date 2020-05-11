@@ -4,16 +4,23 @@
  * @Description: 
  -->
 <template>
-  <div class="button-container">
-    <van-notice-bar text="通知内容" left-icon="volume-o" />
-    <div class="container">
-      <van-button type="info" size="large" block class="margin">待接单{{ waitOrder }}</van-button>
-      <van-button type="primary" size="large" block>已接单{{ ordered }}</van-button>
+  <div>
+    <van-notice-bar text="在此页面可以放置一些广告和其他信息" left-icon="volume-o" />
+    <div class="button-container">
+      <div class="container">
+        <van-button type="info" size="large" block class="margin" @click="handleWaitOrder"
+          >待接单{{ waitOrder }}</van-button
+        >
+        <van-button type="primary" size="large" block @click="handleOrdered"
+          >已接单{{ ordered }}</van-button
+        >
+      </div>
     </div>
   </div>
 </template>
 <script>
-  import { Button, NoticeBar } from 'vant';
+  import { Button, NoticeBar, Notify } from 'vant';
+  import api from 'libjs/api';
 
   export default {
     name: 'OtherHome',
@@ -21,24 +28,60 @@
     components: {
       [Button.name]: Button,
       [NoticeBar.name]: NoticeBar,
+      [Notify.name]: Notify,
     },
 
     data() {
       return {
-        waitOrder: '1',
-        ordered: '2',
+        waitOrder: '',
+        ordered: '',
       };
     },
 
     created() {
       // 获取订单数
+      api.get('/mobile/waitOrder').then(res => {
+        if (res.data.code === 0) {
+          this.waitOrder = res.data.data.length;
+        }
+      });
       // 获取已接单数
+      api.get('/mobile/ordered').then(res => {
+        if (res.data.code === 0) {
+          this.ordered = res.data.data.length;
+        }
+      });
+    },
+
+    methods: {
+      handleWaitOrder() {
+        const { waitOrder } = this;
+        if (waitOrder === 0) {
+          Notify({ type: 'primary', message: '暂时没有待接单的订单哦' });
+          return;
+        }
+        this.$router.push({ path: '/otherhome/WaitOrder' });
+      },
+
+      handleOrdered() {
+        const { ordered } = this;
+        if (ordered === 0) {
+          Notify({ type: 'primary', message: '暂时没有已接单的订单哦' });
+          return;
+        }
+        this.$router.push({ path: '/otherhome/ordered' });
+      },
     },
   };
 </script>
 <style lang="scss" scoped>
   .button-container {
     height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
     @include displayCenter();
 
@@ -51,5 +94,10 @@
         margin-bottom: 20px;
       }
     }
+  }
+
+  .sticky_top {
+    position: absolute;
+    top: 0;
   }
 </style>

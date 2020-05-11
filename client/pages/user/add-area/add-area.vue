@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-  import { NavBar, AddressEdit, Toast } from 'vant';
+  import { NavBar, AddressEdit } from 'vant';
   import areaList from './area';
   import cookie from 'js-cookie';
   import api from 'libjs/api';
@@ -39,7 +39,6 @@
     components: {
       [AddressEdit.name]: AddressEdit,
       [NavBar.name]: NavBar,
-      [Toast.name]: Toast,
     },
 
     methods: {

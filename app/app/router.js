@@ -58,6 +58,8 @@ module.exports = app => {
   router.get('/user/getArea', controller.user.user.getArea);
   // 获取某一个地址的信息信息
   router.get('/user/getOneArea', controller.user.user.getOneArea);
+  // 获取用户的地址信息
+  router.get('/user/getOneAreaById', controller.user.user.getOneAreaById);
   // 更新某一个地址信息
   router.post('/user/updateArea', controller.user.user.updateArea);
 
@@ -68,4 +70,16 @@ module.exports = app => {
 
   // 重设密码
   router.post('/password/resetPassword', controller.password.password.resetPassword);
+
+  // 呼叫服务
+  router.post('/askOrder', controller.askOrder.askOrder.askOrder);
+  // 查看待接单信息
+  router.get('/waitOrder', controller.askOrder.askOrder.waitOrder);
+  // 查看已接单信息
+  router.get('/ordered', controller.askOrder.askOrder.ordered);
+  // 接单
+  router.post('/sureOrder', controller.askOrder.askOrder.sureOrder);
+
+  // 完成订单
+  router.post('/giveMoney', controller.money.money.setMoney);
 };

@@ -6,7 +6,7 @@
 <template>
   <div>
     <van-nav-bar
-      title="上门自提时间选择"
+      title="设置密码"
       left-text="返回"
       right-text=""
       left-arrow

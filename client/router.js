@@ -68,6 +68,18 @@ const routes = [
     component: () => import('./pages/otherhome/other-home.vue'),
   },
   {
+    path: '/otherhome/WaitOrder',
+    component: () => import('./pages/otherhome/wait-order.vue'),
+  },
+  {
+    path: '/otherhome/ordered',
+    component: () => import('./pages/otherhome/ordered.vue'),
+  },
+  {
+    path: '/money',
+    component: () => import('./pages/otherhome/money.vue'),
+  },
+  {
     path: '*',
     component: () => import('./pages/login/login.vue'),
   },

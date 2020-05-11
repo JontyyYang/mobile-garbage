@@ -23,13 +23,11 @@
     </van-cell-group>
 
     <van-cell-group title="其它">
-      <van-cell title="目标" is-link url="/vant/mobile.html" label="本月回收目标" />
+      <van-cell title="目标" is-link to="/extra/target" label="本月回收目标" />
 
-      <van-cell title="回收订单" is-link to="index" label="本月商品订单" />
+      <van-cell title="回收订单" is-link to="/extra/order" label="本月商品订单" />
 
-      <van-cell title="商品订单" is-link to="index" label="本月回收订单" />
-
-      <van-cell title="看过的新闻" is-link url="/vant/mobile.html" label="看过的新闻" />
+      <van-cell title="商品订单" is-link to="/extra/good" label="本月回收订单" />
     </van-cell-group>
   </div>
 </template>

@@ -142,6 +142,14 @@
               // on cancel
               // 取消就当无事发生
             });
+        } else if (name === functionName.wallet) {
+          this.$router.push({ path: '/wallet' });
+        } else if (name === functionName.order) {
+          this.$router.push({ path: '/extra/order' });
+        } else if (name === functionName.CustomerService) {
+          this.$router.push({ path: '/extra/customerservice' });
+        } else if (name === functionName.Leaderboard) {
+          Toast('该功能还没有准备好呀，敬请期待');
         }
       },
       lookMore(id) {

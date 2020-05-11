@@ -79,7 +79,16 @@ module.exports = app => {
   router.get('/ordered', controller.askOrder.askOrder.ordered);
   // 接单
   router.post('/sureOrder', controller.askOrder.askOrder.sureOrder);
+  // 获取某个用户的订单信息
+  router.get('/getOrderByUser', controller.askOrder.askOrder.getOrderByUser);
 
   // 完成订单
   router.post('/giveMoney', controller.money.money.setMoney);
+  // 查看用户所有金额
+  router.get('/getMoney', controller.money.money.getMoney);
+
+  // 获取用户目标
+  router.get('/getNewTarget', controller.money.money.getNewTarget);
+  // 设置用户目标
+  router.post('/setNewTarget', controller.money.money.setNewTarget);
 };

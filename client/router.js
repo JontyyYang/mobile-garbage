@@ -80,6 +80,27 @@ const routes = [
     component: () => import('./pages/otherhome/money.vue'),
   },
   {
+    path: '/wallet',
+    component: () => import('./pages/main/wallet/wallet.vue'),
+  },
+  {
+    path: '/extra/good',
+    component: () => import('./pages/extra/good.vue'),
+  },
+  {
+    path: '/extra/order',
+    component: () => import('./pages/extra/order.vue'),
+  },
+  {
+    path: '/extra/target',
+    component: () => import('./pages/extra/target.vue'),
+  },
+  {
+    path: '/extra/customerservice',
+    component: () => import('./pages/extra/customerservice.vue'),
+  },
+
+  {
     path: '*',
     component: () => import('./pages/login/login.vue'),
   },

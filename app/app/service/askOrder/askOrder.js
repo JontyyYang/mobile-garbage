@@ -52,7 +52,6 @@ class timeService extends Service {
   }
 
   async deleteOrder(id) {
-    console.log(id);
     const result = await this.app.mysql.update(
       'order_info',
       {
@@ -64,6 +63,15 @@ class timeService extends Service {
         },
       },
     );
+    return result;
+  }
+
+  async getOrderByUser({ user_id }) {
+    const result = await this.app.mysql.select('order_info', {
+      where: {
+        user_id,
+      },
+    });
     return result;
   }
 }

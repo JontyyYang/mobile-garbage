@@ -8,12 +8,12 @@ export const funcItem = [
   {
     funcName: '环保钱包',
     funcImg: wallet,
-    funcUrl: './a',
+    funcUrl: 'wallet',
   },
   {
     funcName: '服务订单',
     funcImg: order,
-    funcUrl: './b',
+    funcUrl: 'order',
   },
   {
     funcName: '呼叫服务',
@@ -21,17 +21,21 @@ export const funcItem = [
     funcUrl: 'callService',
   },
   {
-    funcName: '客服中心',
+    funcName: '常见问题',
     funcImg: center,
-    funcUrl: './d',
+    funcUrl: 'CustomerService',
   },
   {
     funcName: '排行榜',
     funcImg: compare,
-    funcUrl: './e',
+    funcUrl: 'Leaderboard',
   },
 ];
 
 export const functionName = {
   callService: 'callService',
+  wallet: 'wallet',
+  order: 'order',
+  CustomerService: 'CustomerService',
+  Leaderboard: 'Leaderboard',
 };

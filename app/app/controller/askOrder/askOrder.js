@@ -79,6 +79,24 @@ class askOrderController extends Controller {
     }
     ctx.body = finalData;
   }
+
+  async getOrderByUser() {
+    const finalData = output();
+    const {
+      ctx,
+      ctx: { query },
+    } = this;
+    const result = await ctx.service.askOrder.askOrder.getOrderByUser(query);
+    if (result) {
+      finalData.data = result;
+      finalData.message = '查询订单成功';
+    } else {
+      finalData.code = -1;
+      finalData.data = result;
+      finalData.message = '查询订单失败， 错误结果未知，请重试';
+    }
+    ctx.body = finalData;
+  }
 }
 
 module.exports = askOrderController;
